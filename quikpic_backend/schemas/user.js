@@ -1,17 +1,17 @@
 export default {
 	name: "user",
-	type: "document",
 	title: "User",
+	type: "document",
 	fields: [
 		{
 			name: "userName",
-			type: "string",
 			title: "UserName",
+			type: "string",
 		},
 		{
 			name: "image",
-			type: "string",
 			title: "Image",
+			type: "string",
 		},
 	],
 };
