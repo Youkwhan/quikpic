@@ -29,13 +29,13 @@ const Home = () => {
 
 	return (
 		<div className="flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out">
+			{/* visiable on md:display (pc) visiable*/}
 			<div className="hidden md:flex h-screen flex-initial">
-				{/* Sidebar hidden mobile and on md:display (pc) visiable*/}
 				<Sidebar />
 			</div>
-			<div className="flex md:hidden flex-row">
-				{/* logo visiable mobile and hidden for md:display pc*/}
 
+			{/* visiable on sm:display (mobile) and hidden for md:display pc*/}
+			<div className="flex md:hidden flex-row">
 				<HiMenu
 					fontSize={40}
 					className="cursor-pointer"
