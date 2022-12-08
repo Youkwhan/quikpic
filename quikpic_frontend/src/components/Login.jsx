@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
+import { FcGoogle } from "react-icons/fc";
 import jwt_decode from "jwt-decode";
 
 import { client } from "../client";
@@ -11,17 +12,18 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	const responseGoogle = (response) => {
+		console.log(response);
 		const decode = jwt_decode(response.credential);
 		console.log(decode);
 		// console.log(response);
 		localStorage.setItem("user", JSON.stringify(decode));
 
 		// deconstructuring
-		const { name, aud, picture } = decode;
+		const { name, sub, picture } = decode;
 
 		// sanity schema
 		const doc = {
-			_id: aud,
+			_id: sub,
 			_type: "user",
 			userName: name,
 			image: picture,
@@ -57,6 +59,7 @@ const Login = () => {
 						<GoogleLogin
 							onSuccess={responseGoogle}
 							onError={() => console.log("Error")}
+							cookiePolicy="single_host_origin"
 						/>
 					</div>
 				</div>
