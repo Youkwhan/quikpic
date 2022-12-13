@@ -33,13 +33,13 @@ const Home = () => {
 
 	return (
 		<div className="flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out">
-			{/* visiable on md:display (pc) visiable*/}
+			{/* visiable on md:display (pc) (no Navbar)*/}
 			<div className="hidden md:flex h-screen flex-initial">
 				{/* desktop Sidebar */}
 				<Sidebar user={user && user} />
 			</div>
 
-			{/* visiable Navbar on sm:display (mobile) and hidden for md:display pc*/}
+			{/* visiable Navbar on sm:display (mobile)*/}
 			<div className="flex md:hidden flex-row">
 				<div className="pd-2 w-full flex flex-row justify-between items-center shadow-md">
 					<HiMenu
@@ -68,7 +68,7 @@ const Home = () => {
 					</div>
 				)}
 			</div>
-			
+			{/* below navbar depending on the Route */}
 			<div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
 				<Routes>
 					<Route path="/user-profile/:userId" element={<UserProfile />} />
