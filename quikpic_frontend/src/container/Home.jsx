@@ -36,7 +36,7 @@ const Home = () => {
 			{/* visiable on md:display (pc) visiable*/}
 			<div className="hidden md:flex h-screen flex-initial">
 				{/* desktop Sidebar */}
-				<Sidebar user={user && user} closeToggle={setToggleSidebar} />
+				<Sidebar user={user && user} />
 			</div>
 
 			{/* visiable Navbar on sm:display (mobile) and hidden for md:display pc*/}

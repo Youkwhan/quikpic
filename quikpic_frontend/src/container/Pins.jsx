@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Pins() {
+const Pins = () => {
   return (
     <div>Pins</div>
   )
