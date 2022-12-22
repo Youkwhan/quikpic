@@ -31,7 +31,6 @@ const Pins = ({user}) => {
 					/>
 				</Routes>
 			</div>
-			Pins
 		</div>
 	);
 };

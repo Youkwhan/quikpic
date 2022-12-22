@@ -1,18 +1,42 @@
-import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-import {client} from "../client";
+import { client } from "../client";
+import { feedQuery, searchQuery } from "../utils/data";
 import MasonryLayout from "./MasonryLayout";
-import Spinner from "./Spinner"
+import Spinner from "./Spinner";
 
 const Feed = () => {
-  const [loading, setloading] = useState(true)
+	const [loading, setLoading] = useState(false);
+	const [pins, setPins] = useState(null);
+	const { categoryId } = useParams(); // get from URL, since clicking Links doesnt rerender
 
-  if (loading) return <Spinner message="We are adding new ideas to your feed!" />
+	// query to fetch the post belonging to a category or in general from sanity
+	// useeffect will run on mount and whenever our category changes
+	useEffect(() => {
+		setLoading(true);
+		// query all the pins/post for a specific category in sanity
+		if (categoryId) {
+			const query = searchQuery(categoryId);
 
-  return (
-    <div>Feed</div>
-  )
-}
+			client.fetch(query).then((data) => {
+				setPins(data);
+				setLoading(false);
+			});
+		} else {
+			// else if we are on / "Homepage" query all the data/post
+			// since no parameters taken we dont have to call the query
+			client.fetch(feedQuery).then((data) => {
+				setPins(data);
+				setLoading(false);
+			});
+		}
+	}, [categoryId]);
 
-export default Feed
+	if (loading)
+		return <Spinner message="We are adding new ideas to your feed!" />;
+
+	return <div>Feed</div>;
+};
+
+export default Feed;

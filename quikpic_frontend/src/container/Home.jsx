@@ -19,7 +19,7 @@ const Home = () => {
 			: localStorage.clear();
 
 	useEffect(() => {
-		// sanity query
+		// sanity query user data from GoogleLogin
 		const query = userQuery(userInfo?.sub);
 
 		client.fetch(query).then((data) => {
