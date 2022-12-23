@@ -13,4 +13,5 @@ export const client = sanityClient({
 
 const builder = imageUrlBuilder(client);
 
+// sanity's speical function to quickly generate and crop and hot-spot images_urls 
 export const urlFor = (source) => builder.image(source);
