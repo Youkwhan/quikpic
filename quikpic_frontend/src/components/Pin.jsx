@@ -127,6 +127,7 @@ const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 								</a>
 							)}
 							{/* (4) if PostedBy user, then have access to delete post */}
+							{/* NOT SHOWING BROKE */}
 							{postedBy?._id === user.googleId && (
 								<button
 									type="button"
