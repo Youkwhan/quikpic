@@ -21,9 +21,8 @@ const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 	// const alreadySaved = !!save?.filter(
 	// 	(item) => item.postedBy._id === user.sub
 	// )?.length;
-	const alreadySaved = !!save?.filter(
-		(item) => item.postedBy?._id === user.sub
-	)?.length;
+	const alreadySaved = !!save?.filter((item) => item.postedBy?._id === user.sub)
+		?.length;
 
 	const savePin = (id) => {
 		if (!alreadySaved) {
@@ -120,9 +119,9 @@ const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 									className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:100 hover:shadow-md "
 								>
 									<BsFillArrowUpRightCircleFill />
-									{destination.length > 20
-										? destination.slice(8, 20)
-										: destination.slice(8)}
+									{destination.length > 15
+										? `${destination.slice(0, 15)}...`
+										: destination}
 								</a>
 							)}
 							{/* (4) if PostedBy user, then have access to delete post */}
