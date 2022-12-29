@@ -14,16 +14,15 @@ const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 	const navigate = useNavigate();
 
 	const user = fetchUser();
-
 	// type: bool
 	// Did user save this post?
 	// 1, [2,3,1] -> [1].length -> 1 -> !1 -> false -> !false -> true
 	// 4, [2,3,1] -> [].length -> 0 -> !0 -> true -> !true -> false
 	// const alreadySaved = !!save?.filter(
-	// 	(item) => item.postedBy._id === user.googleId
+	// 	(item) => item.postedBy._id === user.sub
 	// )?.length;
 	const alreadySaved = !!save?.filter(
-		(item) => item.postedBy?._id === user.googleId
+		(item) => item.postedBy?._id === user.sub
 	)?.length;
 
 	const savePin = (id) => {
@@ -35,10 +34,10 @@ const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 				.insert("after", "save[-1]", [
 					{
 						_key: uuidv4(),
-						userId: user.googleId,
+						userId: user.sub,
 						postedBy: {
 							_type: "postedBy",
-							_ref: user.googleId,
+							_ref: user.sub,
 						},
 					},
 				])
@@ -128,7 +127,7 @@ const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 							)}
 							{/* (4) if PostedBy user, then have access to delete post */}
 							{/* NOT SHOWING BROKE */}
-							{postedBy?._id === user.googleId && (
+							{postedBy?._id === user?.sub && (
 								<button
 									type="button"
 									onClick={(e) => {

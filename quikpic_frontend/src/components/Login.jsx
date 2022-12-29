@@ -12,7 +12,6 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	const responseGoogle = (response) => {
-		console.log(response);
 		const decode = jwt_decode(response.credential);
 		console.log(decode);
 		// console.log(response);
