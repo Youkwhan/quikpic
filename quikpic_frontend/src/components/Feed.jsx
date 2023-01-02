@@ -41,7 +41,7 @@ const Feed = () => {
 	if (!pins?.length) {
 		return <h2 className="text-center">No pins available</h2>;
 	}
-	console.log(pins);
+	// console.log(pins);
 
 	return (
 		<div>{pins && pins.length > 0 ? <MasonryLayout pins={pins} /> : null}</div>

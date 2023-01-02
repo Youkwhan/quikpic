@@ -15,26 +15,32 @@ const Home = () => {
 	const [user, setUser] = useState(null);
 	const scrollRef = useRef(null);
 
-	// get userinfo from GoogleLogin
-	const userInfo = fetchUser();
-	// const userInfo =
-	// 	localStorage.getItem("user") !== "undefined"
-	// 		? JSON.parse(localStorage.getItem("user"))
-	// 		: localStorage.clear();
-
 	useEffect(() => {
-		// query user data from sanity that matches userInfo: _id (logged in user)
-		const query = userQuery(userInfo?.sub);
+		// get userinfo from GoogleLogin token
+		const userInfo = fetchUser();
+		// const userInfo =
+		// 	localStorage.getItem("user") !== "undefined"
+		// 		? JSON.parse(localStorage.getItem("user"))
+		// 		: localStorage.clear();
 
-		client.fetch(query).then((data) => {
-			setUser(data[0]);
-		});
+		if (userInfo) {
+			// query user data from sanity that matches userInfo: _id (logged in user)
+			const query = userQuery(userInfo?.id);
+
+			client.fetch(query).then((data) => {
+				setUser(data[0]);
+			});
+		}
+		return () => {
+			setUser(null);
+		};
 	}, []);
 
 	useEffect(() => {
 		scrollRef.current.scrollTo(0, 0);
 	}, []);
 
+	// console.log(user)
 	return (
 		<div className="flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out">
 			{/* visiable on md:display (pc) (no Navbar)*/}
@@ -54,7 +60,7 @@ const Home = () => {
 					<Link to="/">
 						<img src={logo} alt="logo" className="w-28" />
 					</Link>
-					<Link to={`user-profile/${user?.id}`}>
+					<Link to={`user-profile/${user?._id}`}>
 						<img src={user?.image} alt="logo" className="w-28" />
 					</Link>
 				</div>

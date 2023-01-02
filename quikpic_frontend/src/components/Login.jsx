@@ -4,29 +4,25 @@ import { GoogleLogin } from "@react-oauth/google";
 
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
-import jwt_decode from "jwt-decode";
 
+import { fetchUser } from "../utils/fetchUser";
 import { client } from "../client";
 
 const Login = () => {
 	const navigate = useNavigate();
 
-	const googleLoginSuccess = (response) => {
+	const googleLoginSuccess = async (response) => {
 		try {
-			const decode = jwt_decode(response.credential);
-			console.log(decode);
-			// console.log(response);
-			localStorage.setItem("user", JSON.stringify(decode));
-
+			localStorage.setItem('profile', response.credential);
+			const { name, id, imageUrl } = fetchUser(response.credential);
 			// deconstructuring
-			const { name, sub, picture } = decode;
 
 			// sanity schema
 			const doc = {
-				_id: sub,
+				_id: id,
 				_type: "user",
 				userName: name,
-				image: picture,
+				image: imageUrl,
 			};
 
 			// Redirect to home page and our user is created in sanity dashboard

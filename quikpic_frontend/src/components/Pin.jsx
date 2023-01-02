@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { MdDownloadForOffline } from "react-icons/md";
@@ -11,9 +11,19 @@ import { fetchUser } from "../utils/fetchUser";
 // pin coming from the MasonryLayout, which are fetched from the Feed depending on what category is clicked
 const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 	const [postHovered, setPostHovered] = useState(false);
-	const navigate = useNavigate();
+	// const [savingPost, setSavingPost] = useState(false);
+	const [user, setUser] = useState(null);
 
-	const user = fetchUser();
+	const navigate = useNavigate();
+	useEffect(() => {
+		const userInfo = fetchUser();
+		setUser(userInfo);
+		return () => {
+			setUser(null);
+		};
+	}, []);
+	//const user = fetchUser();
+
 	// type: bool
 	// Did user save this post?
 	// 1, [2,3,1] -> [1].length -> 1 -> !1 -> false -> !false -> true
@@ -21,7 +31,7 @@ const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 	// const alreadySaved = !!save?.filter(
 	// 	(item) => item.postedBy._id === user.sub
 	// )?.length;
-	const alreadySaved = !!save?.filter((item) => item.postedBy?._id === user.sub)
+	const alreadySaved = !!save?.filter((item) => item.postedBy?._id === user?.id)
 		?.length;
 
 	const savePin = (id) => {
@@ -33,10 +43,10 @@ const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 				.insert("after", "save[-1]", [
 					{
 						_key: uuidv4(),
-						userId: user.sub,
+						userId: user.id,
 						postedBy: {
 							_type: "postedBy",
-							_ref: user.sub,
+							_ref: user.id,
 						},
 					},
 				])
@@ -126,7 +136,7 @@ const Pins = ({ pin: { postedBy, image, _id, destination, save } }) => {
 							)}
 							{/* (4) if PostedBy user, then have access to delete post */}
 							{/* NOT SHOWING BROKE */}
-							{postedBy?._id === user?.sub && (
+							{postedBy?._id === user?.id && (
 								<button
 									type="button"
 									onClick={(e) => {
