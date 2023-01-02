@@ -25,8 +25,10 @@ const Feed = () => {
 			});
 		} else {
 			// else if we are on / "Homepage" query all the data/post
-			// since no parameters taken we dont have to call the query
-			client.fetch(feedQuery).then((data) => {
+			// since no parameters taken we dont have to call the query. But let's do it anyways so feedQuery is function
+			const query = feedQuery();
+
+			client.fetch(query).then((data) => {
 				setPins(data);
 				setLoading(false);
 			});
@@ -39,6 +41,7 @@ const Feed = () => {
 	if (!pins?.length) {
 		return <h2 className="text-center">No pins available</h2>;
 	}
+	console.log(pins);
 
 	return (
 		<div>{pins && pins.length > 0 ? <MasonryLayout pins={pins} /> : null}</div>
