@@ -113,52 +113,53 @@ const CreatePin = ({ user }) => {
 						{wrongImageType && <p>Wrong image type</p>}
 						{/* Upload image */}
 						{!imageAsset ? (
-							// <label>
-							// 	<div className="flex flex-col items-center justify-center h-full">
-							// 		<div className="flex flex-col justify-center items-center">
+							<label>
+								<div className="flex flex-col items-center justify-center h-full">
+									<div className="flex flex-col justify-center items-center">
+										<p className="font-bold text-2xl">
+											<AiOutlineCloudUpload />
+										</p>
+										<p className="text-lg">Click to upload</p>
+									</div>
+
+									<p className="mt-32 text-gray-400">
+										Recommendation: Use high-quality JPG, JPEG, SVG, PNG, GIF or
+										TIFF less than 20MB
+									</p>
+								</div>
+								<input
+									type="file"
+									name="upload-image"
+									onChange={uploadImage}
+									className="w-0 h-0"
+								/>
+							</label>
+						) : (
+							// <div className="flex items-center justify-center w-full">
+							// 	<label
+							// 		htmlFor="dropzone-file"
+							// 		className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+							// 	>
+							// 		<div className="flex flex-col items-center justify-center pt-5 pb-6">
 							// 			<p className="font-bold text-2xl">
 							// 				<AiOutlineCloudUpload color="gray" />
 							// 			</p>
-							// 			<p className="text-lg text-gray-400">Click to upload</p>
+							// 			<p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+							// 				<span className="font-semibold">Click to upload</span> or
+							// 				drag and drop
+							// 			</p>
+							// 			<p className="text-xs text-gray-500 dark:text-gray-400">
+							// 				SVG, PNG, JPG or GIF (MAX. 800x400px)
+							// 			</p>
 							// 		</div>
-							// 		<p className="mt-32 text-gray-400">
-							// 			Use high-quality JPG, SVG, PNG, GIF less than 20 MB
-							// 		</p>
-							// 	</div>
-							// 	<input
-							// 		type="file"
-							// 		name="upload-image"
-							// 		onChange={uploadImage}
-							// 		className="w-0 h-0"
-							// 	/>
-							// </label>
-
-							<div className="flex items-center justify-center w-full">
-								<label
-									htmlFor="dropzone-file"
-									className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-								>
-									<div className="flex flex-col items-center justify-center pt-5 pb-6">
-										<p className="font-bold text-2xl">
-											<AiOutlineCloudUpload color="gray" />
-										</p>
-										<p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-											<span className="font-semibold">Click to upload</span> or
-											drag and drop
-										</p>
-										<p className="text-xs text-gray-500 dark:text-gray-400">
-											SVG, PNG, JPG or GIF (MAX. 800x400px)
-										</p>
-									</div>
-									<input
-										id="dropzone-file"
-										type="file"
-										className="hidden"
-										onChange={uploadImage}
-									/>
-								</label>
-							</div>
-						) : (
+							// 		<input
+							// 			id="dropzone-file"
+							// 			type="file"
+							// 			className="hidden"
+							// 			onChange={uploadImage}
+							// 		/>
+							// 	</label>
+							// </div>
 							// Already uploaded
 							<div className="relative h-full">
 								<img
@@ -225,14 +226,14 @@ const CreatePin = ({ user }) => {
 								onChange={(e) => setCategory(e.target.value)}
 								className="outline-none w-4/5 text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
 							>
-								<option value="other" className="bg-white">
+								<option value="other" className="sm:text-bg bg-white">
 									Select Category
 								</option>
 								{categories.map((category) => (
 									<option
 										className="text-base border-0 outline-none capitalize bg-white text-black"
 										value={category.name}
-										key = {category.name}
+										key={category.name}
 									>
 										{category.name}
 									</option>

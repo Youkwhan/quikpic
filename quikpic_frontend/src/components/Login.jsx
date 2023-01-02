@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
+
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
-import { FcGoogle } from "react-icons/fc";
 import jwt_decode from "jwt-decode";
 
 import { client } from "../client";
@@ -11,27 +11,38 @@ import { client } from "../client";
 const Login = () => {
 	const navigate = useNavigate();
 
-	const responseGoogle = (response) => {
-		const decode = jwt_decode(response.credential);
-		console.log(decode);
-		// console.log(response);
-		localStorage.setItem("user", JSON.stringify(decode));
+	const googleLoginSuccess = (response) => {
+		try {
+			const decode = jwt_decode(response.credential);
+			console.log(decode);
+			// console.log(response);
+			localStorage.setItem("user", JSON.stringify(decode));
 
-		// deconstructuring
-		const { name, sub, picture } = decode;
+			// deconstructuring
+			const { name, sub, picture } = decode;
 
-		// sanity schema
-		const doc = {
-			_id: sub,
-			_type: "user",
-			userName: name,
-			image: picture,
-		};
+			// sanity schema
+			const doc = {
+				_id: sub,
+				_type: "user",
+				userName: name,
+				image: picture,
+			};
 
-		// Redirect to home page and our user is created in sanity dashboard
-		client.createIfNotExists(doc).then(() => {
-			navigate("/", { replace: true });
-		});
+			// Redirect to home page and our user is created in sanity dashboard
+			client.createIfNotExists(doc).then(() => {
+				navigate("/", { replace: true });
+			});
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const googleLoginError = (error) => {
+		console.error(
+			"Google Sign In was not successful. Try again later. Details: ",
+			error
+		);
 	};
 
 	return (
@@ -56,9 +67,9 @@ const Login = () => {
 
 					<div className="shadow-2xl">
 						<GoogleLogin
-							onSuccess={responseGoogle}
-							onError={() => console.log("Error")}
-							cookiePolicy="single_host_origin"
+							onSuccess={googleLoginSuccess}
+							onError={googleLoginError}
+							useOneTap
 						/>
 					</div>
 				</div>

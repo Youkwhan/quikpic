@@ -95,7 +95,7 @@ const PinDetail = ({ user }) => {
 							</a>
 						</div>
 						<a href={pinDetail.destination} target="_blank" rel="noreferrer">
-							{pinDetail.destination}
+							{pinDetail.destination?.slice(8)}
 						</a>
 					</div>
 					<div>
@@ -163,7 +163,7 @@ const PinDetail = ({ user }) => {
 					</div>
 				</div>
 			</div>
-      {console.log(pins)}
+			{console.log(pins)}
 			{pins?.length > 0 ? (
 				<>
 					<h2 className="text-center font-bold text-2x mt-8 mb-4">
