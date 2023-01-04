@@ -38,13 +38,30 @@ A user can also save posts that will later appear under the user's profile along
 
 ## Screenshots
 ### Login Page
+
+<img width="1440" alt="Screen Shot 2023-01-04 at 3 34 20 PM" src="https://user-images.githubusercontent.com/37788922/210646156-a2e51f74-3014-4a89-adfd-6a701ac19eb8.png">
+
 ### Landing Page
-### Home Page
+
+ <img width="1440" alt="Screen Shot 2023-01-04 at 3 35 39 PM" src="https://user-images.githubusercontent.com/37788922/210646501-125e74fb-36a3-43f0-b1bf-2752f8906cd2.png">
+
+
 ### Categoy Pages
+
+<img width="1440" alt="Screen Shot 2023-01-04 at 3 36 01 PM" src="https://user-images.githubusercontent.com/37788922/210646514-f1953250-7c9b-4668-b25e-270dde76de4b.png">
+
 ### User Profile
+
+<img width="1440" alt="Screen Shot 2023-01-04 at 3 36 24 PM" src="https://user-images.githubusercontent.com/37788922/210646543-1c236030-8bb2-440b-84d6-49602c1ca57b.png">
+
 ### Create Post
+
+<img width="1440" alt="Screen Shot 2023-01-04 at 3 37 18 PM" src="https://user-images.githubusercontent.com/37788922/210646589-a90dc824-fc51-43fc-bdc4-44a652967ef8.png">
+
 ### Pin Details & Comments
-### Related Posts
+
+<img width="1426" alt="Screen Shot 2023-01-04 at 3 40 51 PM" src="https://user-images.githubusercontent.com/37788922/210646664-82e4b7f7-80a9-4b12-a707-e3a76f7580bb.png">
+
 
 ## Challenges and Decisions
 - 
